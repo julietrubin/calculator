@@ -7,7 +7,7 @@ import styles from "./calculator.module.css"
 // TODO: debounce
 
 const Button = ({value, wide_button, onClick}) => (
-  <button onClick={onClick}
+  <button onClick={() => onClick(value)}
     className={classNames({[styles.button]: true, [styles.wide_button]: wide_button})}>{value} </button>
 )
 
