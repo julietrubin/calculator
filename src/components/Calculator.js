@@ -57,8 +57,27 @@ const computeNumber = (currentNum, buttonValue) => {
   } else if (currentNum === "0") {
     return buttonValue;
   }
+
   // add digit to number
   return currentNum + buttonValue;
+}
+
+const computeEquation = (equation) => {
+  let num1 = parseFloat(equation[0]);
+  let num2 = parseFloat(equation[2]);
+  let operator = equation[1];
+
+  if (operator === MINUS) {
+    return num1 - num2;
+  } else if (operator === PLUS) {
+    return num1 + num2;
+  } else if (operator === DIVID) {
+    return num1 / num2;
+  } else if (operator === REMAINDER) {
+    return num1 % num2;
+  } else if (operator === MULTIPLY) {
+    return num1 * num2;
+  }
 }
 
 class Calculator extends React.Component {
@@ -70,39 +89,51 @@ class Calculator extends React.Component {
 
   handleClick(value) {
     let equation = this.state.equation;
+    let output = this.state.output;
+
     if (value === DOT || value === PLUS_MINUS|| isADigit(value)) {
       // the first valid button click since clearing
       let num;
       if (equation.length === 0) {
-        num = computeNumber("", value);
-        equation = [num];
+        output = computeNumber("", value);
+        equation = [output];
       } else {
         const currentNum = equation.slice(-1)[0];
         // the last button clicked was not involved in creating a number
         if (isNaN(currentNum)) {
-          num = computeNumber("", value)
-          equation.push(num);
+          output = computeNumber("", value)
+          equation.push(output);
         } else {
-          num = computeNumber(currentNum, value)
+          output = computeNumber(currentNum, value)
           equation.pop()
-          equation.push(num);
+          equation.push(output);
         }
       }
-      this.setState({ equation, output: num });
-      //console.log("Number click " + value + " equation " + equation.join(" "))
     } else if (value === CLEAR) {
-      this.setState({ equation: [], output: "" });
-
-    } else if (value === PLUS_MINUS) {
-    } else if (value === MINUS) {
-    } else if (value === PLUS) {
+      equation = [];
+      output = "";
+    } else if ([MINUS, PLUS, DIVID, REMAINDER, MULTIPLY].includes(value)) { // TODO: this should do something when equation is ready to compute
+      // validation check
+      // the last value must be a number
+      if (equation.length > 0 && !isNaN(equation.slice(-1)[0])) {
+        if (equation.length >= 3) {
+          // compute as we go
+          output = computeEquation(equation);
+          equation = [output, value];
+        } else {
+          equation.push(value);
+        }
+      }
     } else if (value === EQUALS) {
-    } else if (value === DIVID) {
-    } else if (value === REMAINDER) {
-    } else if (value === MULTIPLY) {
-    } else {
-      console.log("clicked " + value);
+      // validation check
+      // we something to compute
+      if (equation.length >= 3) {
+        output = computeEquation(equation);
+        equation = [output];
+      }
     }
+    console.log(equation.join(" "));
+    this.setState({ equation, output });
   }
 
   render() {
