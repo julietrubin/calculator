@@ -1,34 +1,18 @@
-.container {
-    padding: 10px;
-    width: 80%;
-    margin: auto;
-}
-
   .calculator {
-    margin: 2rem;
+    margin: 10px auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    background: red;
-    grid-gap: 10px 10px; 
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background: pink;
+    grid-gap: 10px 10px;
     padding: 10px;
-
-
-    /* margin: auto;
-    padding: 20px;
+    height: 500px;
     width: 400px;
-    height: 802px; */
   }
 
   .button {
-    font-size: 3rem;
     text-align: center;
-    padding: 4rem;
     background: white;
-    /* display: inline;
-    padding: 10px;
-    margin: 2px;
-     */
   }
 
   .wide_button {
