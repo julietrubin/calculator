@@ -15,6 +15,11 @@
     background: white;
   }
 
+  .highlighted_button {
+    text-align: center;
+    background: grey;
+  }
+  
   .wide_button {
     grid-column: 1 / 3;
   }

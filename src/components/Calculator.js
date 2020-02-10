@@ -68,15 +68,15 @@ const computeEquation = (equation) => {
   let operator = equation[1];
 
   if (operator === MINUS) {
-    return num1 - num2;
+    return (num1 - num2).toString();
   } else if (operator === PLUS) {
-    return num1 + num2;
+    return (num1 + num2).toString();
   } else if (operator === DIVID) {
-    return num1 / num2;
+    return (num1 / num2).toString();
   } else if (operator === REMAINDER) {
-    return num1 % num2;
+    return (num1 % num2).toString();
   } else if (operator === MULTIPLY) {
-    return num1 * num2;
+    return (num1 * num2).toString();
   }
 }
 
@@ -84,16 +84,23 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = {equation: [], output: ""};
+    // freezeNumber: prevents adding digits to a computed number. 
+    // highlighted: highlights the current operator button
+    this.state = {equation: [], output: "", highlighted: "", freezeNumber: false};
   }
 
   handleClick(value) {
     let equation = this.state.equation;
     let output = this.state.output;
+    let highlighted = "";
+    let freezeNumber = false;
 
-    if (value === DOT || value === PLUS_MINUS|| isADigit(value)) {
+    if (value === DOT || value === PLUS_MINUS || isADigit(value)) {
+      if (this.state.freezeNumber && (value === DOT || isADigit(value))) {
+        // reset the current number because we don't want to add digits to a computed number
+        equation = [];
+      }
       // the first valid button click since clearing
-      let num;
       if (equation.length === 0) {
         output = computeNumber("", value);
         equation = [output];
@@ -112,17 +119,22 @@ class Calculator extends React.Component {
     } else if (value === CLEAR) {
       equation = [];
       output = "";
-    } else if ([MINUS, PLUS, DIVID, REMAINDER, MULTIPLY].includes(value)) { // TODO: this should do something when equation is ready to compute
-      // validation check
-      // the last value must be a number
-      if (equation.length > 0 && !isNaN(equation.slice(-1)[0])) {
-        if (equation.length >= 3) {
+    } else if ([MINUS, PLUS, DIVID, REMAINDER, MULTIPLY].includes(value)) {
+      if (equation.length > 0) {
+        const currentOperator = equation.slice(-1)[0];
+        if ([MINUS, PLUS, DIVID, REMAINDER, MULTIPLY].includes(currentOperator)) {
+          // replace the currentOperator with new one
+          equation.pop();
+          equation.push(value);
+        } else if (equation.length >= 3) {
           // compute as we go
           output = computeEquation(equation);
           equation = [output, value];
+          freezeNumber = true;
         } else {
           equation.push(value);
         }
+        highlighted = value;
       }
     } else if (value === EQUALS) {
       // validation check
@@ -130,10 +142,11 @@ class Calculator extends React.Component {
       if (equation.length >= 3) {
         output = computeEquation(equation);
         equation = [output];
+        freezeNumber = true;
       }
     }
     console.log(equation.join(" "));
-    this.setState({ equation, output });
+    this.setState({ equation, output, highlighted, freezeNumber });
   }
 
   render() {
@@ -142,25 +155,30 @@ class Calculator extends React.Component {
         <div className={styles.output_container}><div className={styles.output_text}>{this.state.output}</div></div>
         <Button onClick={this.handleClick} value={CLEAR}></Button>
         <Button onClick={this.handleClick} value={PLUS_MINUS}></Button>
-        <Button onClick={this.handleClick} value={REMAINDER}></Button>
-        <Button onClick={this.handleClick} value={DIVID}></Button>
+        <Button onClick={this.handleClick} value={REMAINDER} 
+          highlighted={this.state.highlighted === REMAINDER}></Button>
+        <Button onClick={this.handleClick} 
+          highlighted={this.state.highlighted === DIVID} value={DIVID}></Button>
 
         <Button onClick={this.handleClick} value="7"></Button>
         <Button onClick={this.handleClick} value="8"></Button>
         <Button onClick={this.handleClick} value="9"></Button>
-        <Button onClick={this.handleClick} value={MULTIPLY}></Button>
+        <Button onClick={this.handleClick} 
+        highlighted={this.state.highlighted === MULTIPLY} value={MULTIPLY}></Button>
 
         <Button onClick={this.handleClick} value="4"></Button>
         <Button onClick={this.handleClick} value="5"></Button>
         <Button onClick={this.handleClick} value="6"></Button>
-        <Button onClick={this.handleClick} value={MINUS}></Button>
+        <Button onClick={this.handleClick} 
+          highlighted={this.state.highlighted === MINUS} value={MINUS}></Button>
 
         <Button onClick={this.handleClick} value="1"></Button>
         <Button onClick={this.handleClick} value="2"></Button>
         <Button onClick={this.handleClick} value="3"></Button>
-        <Button onClick={this.handleClick} value={PLUS}></Button>
+        <Button onClick={this.handleClick} 
+          highlighted={this.state.highlighted === PLUS} value={PLUS}></Button>
 
-        <Button onClick={this.handleClick} wide_button={true} value="0"></Button>
+        <Button onClick={this.handleClick} wide={true} value="0"></Button>
         <Button onClick={this.handleClick} value={DOT}></Button>
         <Button onClick={this.handleClick} value={EQUALS}></Button>
     </div>
