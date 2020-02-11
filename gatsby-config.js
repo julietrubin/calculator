@@ -1,10 +1,10 @@
 module.exports = {
+  pathPrefix: `/calculator`,
   siteMetadata: {
     title: `Calculator App`,
     description: ``,
     author: `Juliet Rubin`,
   },
-  pathPrefix: `/calculator`,
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
