@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: `/calculator`,
   siteMetadata: {
     title: `Calculator App`,
     description: ``,
