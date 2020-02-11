@@ -44,7 +44,7 @@
         width: 100%;
         background-color:white;
         margin: 0;
-        height: 95vh;
+        height: 90vh;
         padding: 20px;
         overflow: hidden;
     }
@@ -56,7 +56,7 @@
 @media (max-device-width: 830px) and (orientation:landscape) {
     .calculator {
         width: 100%;
-        height: 93vh;
+        height: 90vh;
         margin: 0;
         background-color:white;
     }
