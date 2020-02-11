@@ -13,40 +13,9 @@ const REMAINDER = "%";
 const MULTIPLY = "x";
 const DOT = ".";
 
-
-
-      // // the first valid button click since clearing
-      // if (equation.length === 0) {
-      //   output = computeNumber("", value);
-      //   equation = [output];
-      // } else {
-      //   const currentNum = equation.slice(-1)[0];
-      //   // the last button clicked was not involved in creating a number
-      //   if (isNaN(currentNum)) {
-      //     output = computeNumber("", value)
-      //     equation.push(output);
-      //   } else {
-      //     output = computeNumber(currentNum, value)
-      //     equation.pop()
-      //     equation.push(output);
-      //   }
-      // }
-      // if (equation.length > 0) {
-      //   const currentOperator = equation.slice(-1)[0];
-      //   if ([MINUS, PLUS, DIVID, REMAINDER, MULTIPLY].includes(currentOperator)) {
-      //     // replace the currentOperator with new one
-      //     equation.pop();
-      //     equation.push(value);
-      //   } else if (equation.length >= 3) {
-      //     // compute as we go
-      //     output = computeEquation(equation);
-      //     equation = [output, value];
-      //     freezeNumber = true;
-      //   } else {
-      //     equation.push(value);
-      //   }
-      //   operator = value;
-      //}
+/*
+TODO: make sure output displays when it should
+*/
 
 const isADigit = (value) => {
   return (value >= '0' && value <= '9');
