@@ -15,6 +15,7 @@ const DOT = ".";
 
 /*
 TODO: make sure output displays when it should
+output does not overflow the screen when many digits pressed
 */
 
 const isADigit = (value) => {
