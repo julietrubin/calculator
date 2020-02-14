@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDOM from 'react-dom';
 
 import styles from "./calculator.module.css"
 import Button from "./Button"
@@ -89,7 +90,11 @@ class Calculator extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     // freezeNumber: prevents adding digits to the end of a computed number. 
-    this.state = {num1: "", num2: "", operator: "", output: "", freezeNumber: false};
+    this.state = {num1: "", num2: "", operator: "", output: "0", freezeNumber: false};
+
+    this.outputContainer = React.createRef();
+    this.outputText = React.createRef();
+
   }
 
   isOperatorClick(value) {
@@ -104,10 +109,23 @@ class Calculator extends React.Component {
     return this.state.operator === value && this.state.num2 === "";
   }
 
+  makeOutputFontSmaller(output) {
+    // TODO:
+    // const outputContainerNode = this.outputContainer.current;
+    // const outputTextNode = this.outputText.current;
+
+    // if (outputTextNode.offsetWidth > outputContainerNode.offsetWidth) {
+    //   const domNode = ReactDOM.findDOMNode(outputContainerNode);
+    //   debugger;
+
+    // }
+
+  }
+
   handleClick(value) {
     let num1 = this.state.num1;
     let num2 = this.state.num2; 
-    let output = "";
+    let output = "0";
     let operator = this.state.operator;
     let freezeNumber = false;
 
@@ -152,7 +170,13 @@ class Calculator extends React.Component {
           num1 = output;
           num2 = "";
           operator = "";
+        } else {
+          output = this.state.output;
         }
+    }
+
+    if (this.makeOutputFontSmaller(output)) {
+
     }
 
     console.log({ num1, operator, num2, output, freezeNumber })
@@ -163,7 +187,10 @@ class Calculator extends React.Component {
   render() {
     return (
       <div className={styles.calculator}> 
-        <div className={styles.output_container}><div className={styles.output_text}>{this.state.output}</div></div>
+        <div ref={this.outputContainer} className={styles.output_container}>
+          <div ref={this.outputText} className={styles.output_text}>{this.state.output}</div>
+        </div>
+        
         <Button onClick={this.handleClick} value={CLEAR}></Button>
         <Button onClick={this.handleClick} value={PLUS_MINUS}></Button>
         <Button onClick={this.handleClick} value={REMAINDER} 
