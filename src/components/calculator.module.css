@@ -82,12 +82,10 @@
 
 @media (max-width: 600px) {
     .calculator {
-        width: 100%;
+        width: 90vw;
         height: 90vh;
         grid-gap: 10px 10px;
-        padding: 0 30px;
-
-
+        padding-left: 10vw;
     }
     .button {
         border-radius: 2px;
