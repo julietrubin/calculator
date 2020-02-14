@@ -109,5 +109,11 @@
 @media (max-device-width: 830px) and (orientation:landscape) {
     .calculator {
         height: 100vh;
+        grid-template-rows: 100px;
+
+    }
+
+    .output_text { 
+        bottom: 0 
     }
 }
