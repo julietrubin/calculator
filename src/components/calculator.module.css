@@ -44,7 +44,7 @@
 }
 
 
-@media (min-width: 737px) {
+@media (min-width: 813px) {
     .calculator {
         margin: 10px auto;
         grid-gap: 15px 15px;
@@ -80,7 +80,7 @@
     }    
 }
 
-@media (max-width: 737px), (max-device-width: 830px) and (orientation:landscape){
+@media (max-width: 813px), (max-device-width: 830px) and (orientation:landscape){
     .calculator {
         width: 100vw;
         height: 90vh;
