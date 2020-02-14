@@ -88,11 +88,10 @@
         padding-left: 10vw;
     }
     .button {
-        border-radius: 2px;
+        background-color: lightskyblue;
         color: white;
         font-size: 2rem;
         border-radius: 20px;
-        -webkit-text-stroke: 1px black;
     }
 
     .highlighted_button {
