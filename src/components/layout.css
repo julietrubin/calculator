@@ -624,7 +624,7 @@ pre tt:after {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 737px) {
   body {
     background-color: white;
 
