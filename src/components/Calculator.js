@@ -85,7 +85,7 @@ const computeEquation = (num1, num2, operator) => {
     output = num1 * num2;
   }
 
-  return output.toFixed(2).toString();
+  return (Math.round(output.toFixed(2)*100)/100).toString();
 }
 
 class Calculator extends React.Component {
