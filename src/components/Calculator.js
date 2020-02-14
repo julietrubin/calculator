@@ -125,7 +125,7 @@ class Calculator extends React.Component {
   handleClick(value) {
     let num1 = this.state.num1;
     let num2 = this.state.num2; 
-    let output = "0";
+    let output = this.state.output;
     let operator = this.state.operator;
     let freezeNumber = false;
 
@@ -148,6 +148,7 @@ class Calculator extends React.Component {
       num1 = "";
       num2 = "";
       operator = "";
+      output = "0";
     } else if (this.isOperatorClick(value)) {
       if (num1 !== "") {
         if (num2 !== "") {
@@ -170,8 +171,6 @@ class Calculator extends React.Component {
           num1 = output;
           num2 = "";
           operator = "";
-        } else {
-          output = this.state.output;
         }
     }
 
