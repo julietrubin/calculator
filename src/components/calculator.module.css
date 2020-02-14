@@ -82,23 +82,27 @@
 
 @media (max-width: 600px) {
     .calculator {
-        width: 90vw;
+        width: 100vw;
         height: 90vh;
-        grid-gap: 10px 10px;
-        padding-left: 10vw;
+        overflow: hidden;
     }
     .button {
-        background-color: lightskyblue;
+        background-color: lightsteelblue;
         color: white;
         font-size: 2rem;
-        border-radius: 20px;
+        border: 1px solid black;
     }
 
     .highlighted_button {
-        background-color: yellow;
+        background-color: lightskyblue;
+
     }
     .output_text { 
         font-size: 5rem;
+    }
+    .output_container {
+        background-color: black;
+
     }
 }
 
