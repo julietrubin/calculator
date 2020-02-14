@@ -71,18 +71,21 @@ const computeNumber = (currentNum, buttonValue) => {
 const computeEquation = (num1, num2, operator) => {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
+  let output = 0;
 
   if (operator === MINUS) {
-    return (num1 - num2).toString();
+    output = num1 - num2;
   } else if (operator === PLUS) {
-    return (num1 + num2).toString();
+    output = num1 + num2;
   } else if (operator === DIVID) {
-    return (num1 / num2).toString();
+    output = num1 / num2;
   } else if (operator === REMAINDER) {
-    return (num1 % num2).toString();
+    output = num1 % num2;
   } else if (operator === MULTIPLY) {
-    return (num1 * num2).toString();
+    output = num1 * num2;
   }
+
+  return output.toFixed(2).toString();
 }
 
 class Calculator extends React.Component {
